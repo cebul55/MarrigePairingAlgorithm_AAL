@@ -3,9 +3,9 @@ package DataGenerator;
 import java.util.Random;
 import static java.lang.Math.round;
 
-public class RandomNumber {
+public class RandomData {
 
-    public RandomNumber(){};
+    public RandomData(){};
 
     public int getRandomHeight(Sex sex){
         //males are heigher than females, ex average height in USA used to generate height - >
