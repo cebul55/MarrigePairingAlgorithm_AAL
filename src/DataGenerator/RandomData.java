@@ -18,17 +18,21 @@ public class RandomData {
         int deviationHeight = 20;
         switch (sex){
             case MALE:{
-                gaussianHeight = (int) round((rand.nextGaussian() * deviationHeight + averageMaleHeight));
+                while (gaussianHeight < 155 || gaussianHeight > 206) {
+                    gaussianHeight = (int) round((rand.nextGaussian() * deviationHeight + averageMaleHeight));
+                }
                 break;
             }
             case FEMALE:{
-                gaussianHeight = (int) round((rand.nextGaussian() * deviationHeight + averageFemaleHeight));
+                while (gaussianHeight < 142 || gaussianHeight > 192) {
+                    gaussianHeight = (int) round((rand.nextGaussian() * deviationHeight + averageFemaleHeight));
+                }
                 break;
             }
         }
         return gaussianHeight;
     }
-
+//gaussian functions may return unnatural values like "-1" so added while() restrains
     public int getRandomHeadGirth(Sex sex){
         //average gitrth for men: 56-61 cm
         //for women: 53 -58.5 cm
@@ -40,11 +44,14 @@ public class RandomData {
 
         switch (sex){
             case MALE:{
+                while (gaussianGirth < 53 || gaussianGirth > 65)
                 gaussianGirth = (int) round((rand.nextGaussian() * averageMaleHeadGirth + deviationHeadGirth));
                 break;
             }
             case FEMALE:{
-                gaussianGirth = (int) round((rand.nextGaussian() * averageFemaleHeadGirth + deviationHeadGirth));
+                while(gaussianGirth < 50 || gaussianGirth > 61) {
+                    gaussianGirth = (int) round((rand.nextGaussian() * averageFemaleHeadGirth + deviationHeadGirth));
+                }
                 break;
             }
         }
