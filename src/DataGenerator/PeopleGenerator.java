@@ -3,8 +3,9 @@ package DataGenerator;
 import java.util.Vector;
 
 public class PeopleGenerator {
-    private Vector<Person> malePeople = new Vector<>();
-    private Vector<Person> femalePeople = new Vector<>();
+
+    private PeopleVector malePeople = new PeopleVector();
+    private PeopleVector femalePeople = new PeopleVector();
 
     public PeopleGenerator(int numberOfEachSex){
 
@@ -14,16 +15,21 @@ public class PeopleGenerator {
             tmpMale = new Person(Sex.MALE);
             tmpFemale = new Person(Sex.FEMALE);
 
-            malePeople.add(tmpMale);
-            femalePeople.add(tmpFemale);
+            malePeople.addPerson(tmpMale);
+            femalePeople.addPerson(tmpFemale);
         }
     }
 
-    public Vector<Person> getFemalePeople() {
+    public PeopleVector getFemalePeople() {
         return femalePeople;
     }
 
-    public Vector<Person> getMalePeople() {
+    public PeopleVector getMalePeople() {
         return malePeople;
+    }
+
+    public void sortByHeight(){
+        malePeople.sortPeopleVectorByHeight();
+        femalePeople.sortPeopleVectorByHeight();
     }
 }

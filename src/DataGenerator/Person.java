@@ -1,7 +1,10 @@
 package DataGenerator;
 
 
+import java.util.Comparator;
+
 public class Person {
+    public final Comparator<Person> BY_HEIGHT = new PeopleComparator();
     private Sex sex;
     private int height;
     private int headGirth;
@@ -48,4 +51,6 @@ public class Person {
     public int getHeadGirth() {
         return headGirth;
     }
+
 }
+

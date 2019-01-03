@@ -15,16 +15,17 @@ public class Main {
         System.out.println("Next Gaussian value: " + rand);
         System.out.println("Next Gaussian HEIGHT value: " + (rand * 20 + 180));
 
-        PeopleGenerator peopleGenerator = new PeopleGenerator(2);
-        for(int i = 0 ; i < 2; i++){
+        PeopleGenerator peopleGenerator = new PeopleGenerator(5000);
+        peopleGenerator.sortByHeight();
+        for(int i = 0 ; i < 5000; i++){
             System.out.println("Male " + i);
-            System.out.println(peopleGenerator.getMalePeople().get(i).getSex());
-            System.out.println(peopleGenerator.getMalePeople().get(i).getHeight());
-            System.out.println(peopleGenerator.getMalePeople().get(i).getHeadGirth());
-            System.out.println("Female" + i);
-            System.out.println(peopleGenerator.getFemalePeople().get(i).getSex());
-            System.out.println(peopleGenerator.getFemalePeople().get(i).getHeight());
-            System.out.println(peopleGenerator.getFemalePeople().get(i).getHeadGirth());
+            System.out.println(peopleGenerator.getMalePeople().getPeopleVector().get(i).getSex());
+            System.out.println(peopleGenerator.getMalePeople().getPeopleVector().get(i).getHeight());
+            System.out.println(peopleGenerator.getMalePeople().getPeopleVector().get(i).getHeadGirth());
+//            System.out.println("Female" + i);
+//            System.out.println(peopleGenerator.getFemalePeople().getPeopleVector().get(i).getSex());
+//            System.out.println(peopleGenerator.getFemalePeople().getPeopleVector().get(i).getHeight());
+//            System.out.println(peopleGenerator.getFemalePeople().getPeopleVector().get(i).getHeadGirth());
 
         }
     }
