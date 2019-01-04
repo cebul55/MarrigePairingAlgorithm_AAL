@@ -1,11 +1,15 @@
 import DataGenerator.PeopleGenerator;
+import PairingAlgorithm.PeopleGraph;
 
 import java.util.Random;
+
+
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
+        final int peopleToGenerate = 2;
         System.out.println("HELLO AAL");
 
         // create random object
@@ -15,18 +19,24 @@ public class Main {
         System.out.println("Next Gaussian value: " + rand);
         System.out.println("Next Gaussian HEIGHT value: " + (rand * 20 + 180));
 
-        PeopleGenerator peopleGenerator = new PeopleGenerator(5000);
+        PeopleGenerator peopleGenerator = new PeopleGenerator(peopleToGenerate);
         peopleGenerator.sortByHeight();
-        for(int i = 0 ; i < 5000; i++){
-            System.out.println("Male " + i);
-            System.out.println(peopleGenerator.getMalePeople().getPeopleVector().get(i).getSex());
-            System.out.println(peopleGenerator.getMalePeople().getPeopleVector().get(i).getHeight());
-            System.out.println(peopleGenerator.getMalePeople().getPeopleVector().get(i).getHeadGirth());
-//            System.out.println("Female" + i);
-//            System.out.println(peopleGenerator.getFemalePeople().getPeopleVector().get(i).getSex());
-//            System.out.println(peopleGenerator.getFemalePeople().getPeopleVector().get(i).getHeight());
-//            System.out.println(peopleGenerator.getFemalePeople().getPeopleVector().get(i).getHeadGirth());
+        for(int i = 0 ; i < peopleToGenerate; i++){
+            System.out.print(i + " ");
+            peopleGenerator.getMalePeople().getPeopleVector().get(i).writePerson();
 
         }
+        for(int i = 0 ; i < peopleToGenerate; i++){
+            System.out.print(i + " ");
+            peopleGenerator.getFemalePeople().getPeopleVector().get(i).writePerson();
+
+        }
+
+        System.out.println("PEOPLE GRAPH: \n");
+        PeopleGraph graph = new PeopleGraph(peopleGenerator);
+        graph.writePeopleGraph();
+
+        System.out.println("Check if all man has at least 1 possible woman to pair with: " + graph.checkIfMenHasVector());
+        System.out.println("Difference " + graph.getDifferenceOfSums());
     }
 }

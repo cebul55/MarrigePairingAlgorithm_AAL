@@ -6,16 +6,19 @@ import java.util.Vector;
 public class PeopleVector implements PeopleVectorInterface {
 
     private Vector<Person> peopleVector;
-    private int numberOfPeople;
+    private int numberOfPeople = 0;
+    private int sumHeights = 0;
+    private int sumHeadGirths = 0;
 
     PeopleVector() {
         peopleVector = new Vector<>();
-        numberOfPeople = 0;
     }
 
     public void addPerson(Person person){
-        peopleVector.add(person);
-        numberOfPeople++;
+        this.peopleVector.add(person);
+        this.sumHeights += person.getHeight();
+        this.sumHeadGirths += person.getHeadGirth();
+        this.numberOfPeople++;
     }
 
     public int getNumberOfPeople() {
@@ -24,6 +27,14 @@ public class PeopleVector implements PeopleVectorInterface {
 
     public Vector<Person> getPeopleVector() {
         return peopleVector;
+    }
+
+    public int getSumHeights(){
+        return sumHeights;
+    }
+
+    public int getSumHeadGirths(){
+        return sumHeadGirths;
     }
 
     @Override
