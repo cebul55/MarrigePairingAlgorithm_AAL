@@ -1,23 +1,16 @@
 package PairingAlgorithm;
 
-import DataGenerator.PeopleGenerator;
 import DataGenerator.PeopleVector;
 import DataGenerator.Person;
+import Graph.Graph;
+import Graph.Edge;
+import Graph.Node;
 
 import java.util.Vector;
 
-public class PeopleGraph {
-
-    private Vector<Vector<Person>> peopleGraph = new Vector<Vector<Person>>();
-    private static int differenceOfSums;
-
-    public PeopleGraph(PeopleGenerator peopleGenerator){
-        this(peopleGenerator.getMalePeople(), peopleGenerator.getFemalePeople());
-    }
+public class PeopleGraph extends Graph {
 
     public PeopleGraph(PeopleVector malePeople, PeopleVector femalePeople){
-
-        differenceOfSums = (malePeople.getSumHeights() + malePeople.getSumHeadGirths()) - (femalePeople.getSumHeights() + femalePeople.getSumHeadGirths());
 
         malePeople.sortPeopleVectorByHeight();
         femalePeople.sortPeopleVectorByHeight();
@@ -27,7 +20,18 @@ public class PeopleGraph {
         Vector<Person> tmpMale = malePeople.getPeopleVector();
         Vector<Person> tmpFemale = femalePeople.getPeopleVector();
 
-        for(int i = 0; i < malePeople.getNumberOfPeople(); i++){
+        //utworzenie listy wierzcholkow
+        // 0 .. n-1 wierzcholki mezczyzn
+        // n .. 2*n -1 wierzcholki kobiet
+        for (int i = 0 ; i < malePeople.getNumberOfPeople(); i++){
+            nodeList.add(new PeopleNode(i, tmpMale.get(i)));
+        }
+        for(int i = femalePeople.getNumberOfPeople(); i < 2* femalePeople.getNumberOfPeople(); i++){
+            nodeList.add(new PeopleNode( i, tmpFemale.get(i - femalePeople.getNumberOfPeople())));
+        }
+        nodeCount = malePeople.getNumberOfPeople() * 2 ;
+
+        for(int i = 0 ; i < malePeople.getNumberOfPeople(); i++){
             int tmpMaleHeight = tmpMale.get(i).getHeight();
             int tmpMaleHeadGirth = tmpMale.get(i).getHeadGirth();
 
@@ -35,55 +39,50 @@ public class PeopleGraph {
             int tmpFemaleHeight = tmpFemale.get(j).getHeight();
             int tmpFemaleHeadGirth = tmpFemale.get(j).getHeadGirth();
 
-            Vector<Person> tmpVector = new Vector<>();
-            tmpVector.add(tmpMale.get(i));
-
-
-            while (tmpMaleHeight > tmpFemaleHeight && j < femalePeople.getNumberOfPeople() ){
+            while(tmpMaleHeight > tmpFemaleHeight && j < femalePeople.getNumberOfPeople() ){
                 tmpFemaleHeight = tmpFemale.get(j).getHeight();
                 tmpFemaleHeadGirth = tmpFemale.get(j).getHeadGirth();
 
                 if( tmpMaleHeight > tmpFemaleHeight && tmpMaleHeadGirth > tmpFemaleHeadGirth){
-                    tmpVector.add(tmpFemale.get(j));
-                    j++;
+                    //utworz krawedz
+                    //addEdge(i, tmpMale.get(i), malePeople.getNumberOfPeople() + j, tmpFemale.get(j));
+                    addEdge(i, j + femalePeople.getNumberOfPeople());
+                    addEdge(j + femalePeople.getNumberOfPeople(),i );
                 }
-                else if (tmpMaleHeight > tmpFemaleHeight && tmpMaleHeadGirth <= tmpFemaleHeadGirth ){
-                    //Wzrost jest wiekszy wiec jest sens sprawdzac kolejna kobiete, bez tworzenia krawedzi
-                    //todo chech if that else statement is necessary
-                    j++;
-                }
+                j++;
             }
-            peopleGraph.add(tmpVector);
         }
-    }
 
-    public boolean checkIfMenHasVector(){
-        for (Vector<Person> aPeopleGraph : peopleGraph) {
-            if (aPeopleGraph.size() == 1) {
-                //that means man cannot be paired with any women -> end of algorithm
+    }
+    //dodaje krawedz
+    public void addEdge(int begin, int end){
+        PeopleNode p1 = (PeopleNode) this.getNode(begin);
+        PeopleNode p2 = (PeopleNode) this.getNode(end);
+        int difference = p1.getPerson().countDifference(p2.getPerson());
+        addEdge(new PeopleEdge(p1, p2, difference));
+    }
+    //sprawdza czy wszystkie wierzcholki maja co najmniej 1 krawdzedz, jezeli nie to problemu nie da sie rozwiazac
+    public boolean checkIfEverybodyHasEdge(){
+        for(Node node: nodeList){
+            PeopleNode peopleNode = (PeopleNode) node;
+            if(peopleNode.getNumberEdges() == 0)
                 return false;
-            }
         }
         return true;
     }
 
-    public int getDifferenceOfSums(){
-        return differenceOfSums;
-    }
-
     public void writePeopleGraph(){
-        //to test
-        int i = 0;
-        int j = 0;
-        for(Vector<Person> aPeopleGraph : peopleGraph ) {
-            System.out.println("---" + i + "---");
-            j = 0;
-            for(Person aVectorPerson : aPeopleGraph){
-                System.out.print(j + " ");
-                aVectorPerson.writePerson();
-                j++;
+        for(Node node: nodeList){
+            PeopleNode peopleNode = (PeopleNode) node;
+            System.out.println("NODE: " + peopleNode.getNumber());
+            peopleNode.getPerson().writePerson();
+            for(Edge edge: peopleNode.getEdges()){
+                System.out.print("    " + ((PeopleEdge) edge).getEnd().getNumber() + ": ");
+                ((PeopleEdge) edge).getEnd().getPerson().writePerson();
             }
-            i++;
         }
     }
+
 }
+
+

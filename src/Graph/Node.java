@@ -1,5 +1,7 @@
 package Graph;
 
+import PairingAlgorithm.PeopleEdge;
+
 import java.util.LinkedList;
 
 public class Node {
@@ -45,5 +47,9 @@ public class Node {
             }
         }
         return null;
+    }
+
+    public int getNumberEdges(){
+        return edges.size();
     }
 }

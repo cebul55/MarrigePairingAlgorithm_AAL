@@ -1,5 +1,6 @@
 import DataGenerator.PeopleGenerator;
 import PairingAlgorithm.PeopleGraph;
+import PairingAlgorithm.PeopleGraphCONSTRUCT;
 
 import java.util.Random;
 
@@ -9,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        final int peopleToGenerate = 20;
+        final int peopleToGenerate = 5;
         System.out.println("HELLO AAL");
 
         // create random object
@@ -32,11 +33,17 @@ public class Main {
 
         }
 
-        System.out.println("PEOPLE GRAPH: \n");
-        PeopleGraph graph = new PeopleGraph(peopleGenerator);
-        graph.writePeopleGraph();
+        //System.out.println("PEOPLE GRAPH: \n");
+        PeopleGraphCONSTRUCT graph = new PeopleGraphCONSTRUCT(peopleGenerator);
+        //graph.writePeopleGraph();
 
         System.out.println("Check if all man has at least 1 possible woman to pair with: " + graph.checkIfMenHasVector());
         System.out.println("Difference " + graph.getDifferenceOfSums());
+
+        System.out.println("********\"********\"********\"********");
+
+        PeopleGraph peopleGraph = new PeopleGraph(peopleGenerator.getMalePeople(), peopleGenerator.getFemalePeople());
+        peopleGraph.writePeopleGraph();
+        System.out.println("Check if all man has at least 1 possible woman to pair with: " + peopleGraph.checkIfEverybodyHasEdge());
     }
 }

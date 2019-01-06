@@ -3,8 +3,8 @@ package Graph;
 import java.util.LinkedList;
 
 public class Graph {
-    private LinkedList<Node> nodeList = new LinkedList<Node>();
-    private int nodeCount = 0;
+    protected LinkedList<Node> nodeList = new LinkedList<Node>();
+    protected int nodeCount = 0;
 
     public Graph() {}
 

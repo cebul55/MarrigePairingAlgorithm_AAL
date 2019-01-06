@@ -57,5 +57,14 @@ public class Person {
         System.out.println(this.sex + " HEIGHT: " + this.getHeight() + " HEADGIRTH: " + this.getHeadGirth());
     }
 
+    public int countDifference(Person p){
+        if(this.getSex() == Sex.MALE && p.getSex() == Sex.FEMALE){
+            return this.getHeight() + this.getHeadGirth() - p.getHeight() - p.getHeadGirth();
+        }
+        else if(this.getSex() == Sex.FEMALE && p.getSex() == Sex.MALE){
+            return p.getHeight() + p.getHeadGirth() - this.getHeight() - this.getHeadGirth();
+        }
+        else return 0;
+    }
 }
 

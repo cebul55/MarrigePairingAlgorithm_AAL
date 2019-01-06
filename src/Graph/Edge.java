@@ -1,12 +1,10 @@
 package Graph;
 
-import DataGenerator.Person;
-
 public class Edge {
     private Node begin, end;
     private int weight;
 
-    private Edge(){}
+    Edge(){}
 
 //    private Egde(Person male, Person female){
 //
@@ -20,7 +18,7 @@ public class Edge {
 
     public Node getBegin() {
         return begin;
-    }
+}
 
     public Node getEnd() {
         return end;
@@ -29,4 +27,6 @@ public class Edge {
     public int getWeight() {
         return weight;
     }
+
+
 }
