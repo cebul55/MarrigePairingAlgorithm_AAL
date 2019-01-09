@@ -29,9 +29,26 @@ public class Person {
         this.headGirth = rand.getRandomHeadGirth(this.sex);
     }
 
+    public Person(String sex, String height, String headGirth){
+        this.setSexString(sex);
+        this.height = Integer.parseInt(height);
+        this.headGirth = Integer.parseInt(headGirth);
+    }
+
     private void setSex(int sex){
         switch (sex){
             case 0:
+                this.sex = Sex.MALE;
+                break;
+            default:
+                this.sex = Sex.FEMALE;
+                break;
+        }
+    }
+
+    private void setSexString(String sex){
+        switch (sex){
+            case "Male":
                 this.sex = Sex.MALE;
                 break;
             default:

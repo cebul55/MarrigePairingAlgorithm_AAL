@@ -10,7 +10,7 @@ public class PeopleVector implements PeopleVectorInterface {
     private int sumHeights = 0;
     private int sumHeadGirths = 0;
 
-    PeopleVector() {
+    public PeopleVector() {
         peopleVector = new Vector<>();
     }
 
