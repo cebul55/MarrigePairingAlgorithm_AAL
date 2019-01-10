@@ -52,4 +52,13 @@ public class Node {
     public int getNumberEdges(){
         return edges.size();
     }
+
+    public LinkedList<Integer> getNeighboursList(){
+        LinkedList<Integer> neighboursList = new LinkedList<>();
+        for(Edge e: edges){
+            neighboursList.add(e.getEnd().getNumber());
+        }
+
+        return neighboursList;
+    }
 }

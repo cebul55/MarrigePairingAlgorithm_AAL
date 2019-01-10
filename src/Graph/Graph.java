@@ -61,13 +61,17 @@ public class Graph {
             nodeList.get(b).removeEdge( e.getEnd().getNumber() );
     }
 
-    public Node getNode(int i ){
+    public Node getNode(int i){
         return nodeList.get(i);
     }
 
     //zwraca kopie listy wierzcholkow
-    public LinkedList<Node> getNodeList()
+    protected LinkedList<Node> getNodeList()
     {
         return new LinkedList<Node>(nodeList);
+    }
+
+    protected int getNodeCount(){
+        return nodeCount;
     }
 }
