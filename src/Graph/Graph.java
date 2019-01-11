@@ -15,6 +15,14 @@ public class Graph {
         this.nodeCount = nodeCount;
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        for (Node node: nodeList ) {
+            node.getNeighboursList().clear();
+        }
+        this.nodeList.clear();
+    }
+
     //dodanie nowego wierzcholka
     public void addNode(){
         nodeList.add(new Node(nodeCount));

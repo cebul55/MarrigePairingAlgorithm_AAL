@@ -65,6 +65,12 @@ public class PeopleGraph extends Graph {
         }
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        this.tableOfMatches = null;
+    }
+
     /**
      * funkcja konstruujaca graf dwudzielny, z kobiet i mezczyzn. Krawedze nigdy nie biegna pomiedzy
      *  obiektami tej samej plci
