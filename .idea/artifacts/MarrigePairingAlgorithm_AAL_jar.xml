@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="MarrigePairingAlgorithm_AAL:jar">
+  <artifact type="jar" build-on-make="true" name="MarrigePairingAlgorithm_AAL:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/MarrigePairingAlgorithm_AAL_jar</output-path>
     <root id="archive" name="MarrigePairingAlgorithm_AAL.jar">
       <element id="module-output" name="MarrigePairingAlgorithm_AAL" />

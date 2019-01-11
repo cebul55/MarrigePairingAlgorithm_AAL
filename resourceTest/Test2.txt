@@ -1,0 +1,8 @@
+Female;140;40
+Female;135;38
+Female;155;38
+Male;140;40
+Male;150;45
+Male;160;39
+Female;170;50
+Male;180;60

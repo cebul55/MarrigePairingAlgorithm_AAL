@@ -9,15 +9,17 @@ import Graph.Node;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 public class PeopleGraph extends Graph {
 
     private int difference = 0;
+    private int[] tableOfMatches = null;
+    private long elapsedTime = 0;
 
     public PeopleGraph(PeopleVector malePeople, PeopleVector femalePeople){
         super();
@@ -188,7 +190,7 @@ public class PeopleGraph extends Graph {
         for(int i = 0 ; i < n ; i++){
             matching[i] = (-1);
         }
-
+        long startTime = System.nanoTime();
         //wlasciwy algorytm
         for(int v = 0; v < n; v++){
             vPeopleNode = (PeopleNode) this.getNode(v);
@@ -232,14 +234,32 @@ public class PeopleGraph extends Graph {
                             }
                             x = alternatingPath[x];
                         }
+                        break;
                     }
                 }
             }
         }
 
+        long endTime = System.nanoTime();
+        this.elapsedTime = endTime - startTime;
+
+        tableOfMatches = matching;
         return matching;
     }
 
+    public boolean checkPairingAlgorithmResult(){
+        for(int each: this.tableOfMatches){
+            if(each < 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public long getElapsedTime(){
+        //return TimeUnit.NANOSECONDS.toSeconds(elapsedTime);
+        return this.elapsedTime;
+    }
 }
 
 

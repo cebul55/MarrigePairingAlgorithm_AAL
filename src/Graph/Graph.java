@@ -71,7 +71,7 @@ public class Graph {
         return new LinkedList<Node>(nodeList);
     }
 
-    protected int getNodeCount(){
+    public int getNodeCount(){
         return nodeCount;
     }
 }
