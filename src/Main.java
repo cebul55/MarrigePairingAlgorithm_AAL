@@ -11,6 +11,7 @@ import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Scanner;
 
 import static java.lang.StringBuilder.*;
 
@@ -62,7 +63,7 @@ public class Main {
 
             String fileContent = "";
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(workingDirectory + "/RESULTS.txt"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(workingDirectory + "/TIMERESULTS.txt"))) {
 
                 for(int i = 0; i < numberOfProblems ; i++){
                     for(int j = 0; j < numberOfIterations; j++){
@@ -88,6 +89,7 @@ public class Main {
         else {
             System.out.println("Nieprawidlowa ilosc parametrow wywolania programu.");
             System.out.println("Dozwolone wywolania programu: ");
+            System.out.println("java -jar MarrigePairingAlgorithm_AAL.jar put");
             System.out.println("java -jar MarrigePairingAlgorithm_AAL.jar [numberOfPeopleToGenerate]");
             System.out.println("java -jar MarrigePairingAlgorithm_AAL.jar g [numberOfPeopleToGenerate]");
             System.out.println("java -jar MarrigePairingAlgorithm_AAL.jar f [filename]");
@@ -97,6 +99,8 @@ public class Main {
     }
 
     static void graphOperations(PeopleGraph peopleGraph){
+        String workingDirectory =  System.getProperty("user.dir");
+
         if(!peopleGraph.checkIfEverybodyHasEdge()){
             System.out.println("Problem nie moze byc rozwiazany, istnieje co najmniej jedna osoba, ktora nie moze zostac polaczona z inna.");
             return;
@@ -109,6 +113,7 @@ public class Main {
                 System.out.println("Pair: " + i + " - " + result[i]);
             }
             System.out.println("Wielkosc problemu: " + result.length + ", elapsed time: " + peopleGraph.getElapsedTime() + "(nanoseconds).");
+            peopleGraph.writePairsToFile(workingDirectory + "/PAIRS.csv");
         }
         else{
             System.out.println("Wielkosc problemu: " + result.length + ", elapsed time: " + peopleGraph.getElapsedTime() + "(nanoseconds).");
@@ -122,7 +127,7 @@ public class Main {
             System.out.println("Problem nie moze byc rozwiazany, istnieje co najmniej jedna osoba, ktora nie moze zostac polaczona z inna.");
             return -1;
         }
-
+cd ../.
         peopleGraph.pairingAlgorithm();
         return peopleGraph.getElapsedTime();
     }

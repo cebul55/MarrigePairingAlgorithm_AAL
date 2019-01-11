@@ -30,4 +30,8 @@ public class PeopleNode extends Node {
         super.addEdge(e);
     }
 
+    @Override
+    public String toString() {
+        return (this.getNumber() + ";" + this.getPerson().getSex() + ";" + this.getPerson().getHeight() + ";" + this.getPerson().getHeadGirth());
+    }
 }

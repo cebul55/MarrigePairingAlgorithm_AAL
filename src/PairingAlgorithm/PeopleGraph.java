@@ -7,8 +7,7 @@ import Graph.Graph;
 import Graph.Edge;
 import Graph.Node;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -259,6 +258,27 @@ public class PeopleGraph extends Graph {
     public long getElapsedTime(){
         //return TimeUnit.NANOSECONDS.toSeconds(elapsedTime);
         return this.elapsedTime;
+    }
+
+    public void writePairsToFile(String filePath){
+        String fileContent = "nr;SEX;HEIGHT;HEAD;nr;SEX;HEIGHT;HEAD\n";
+
+        BufferedWriter writer = null;
+        PeopleNode n1, n2;
+        try {
+            writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(fileContent);
+            for(int i = 0; i < this.getNodeCount() / 2; i++){
+                n1 = (PeopleNode) this.getNode(i);
+                n2 = (PeopleNode) this.getNode(tableOfMatches[i]);
+                fileContent = n1.toString() + ";" + n2.toString() + "\n";
+                writer.write(fileContent);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
