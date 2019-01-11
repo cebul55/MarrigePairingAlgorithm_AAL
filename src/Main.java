@@ -63,7 +63,7 @@ public class Main {
 
             String fileContent = "";
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(workingDirectory + "/TIMERESULTS.txt"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(workingDirectory + "/TIMERESULTS.csv"))) {
 
                 for(int i = 0; i < numberOfProblems ; i++){
                     for(int j = 0; j < numberOfIterations; j++){
@@ -79,7 +79,7 @@ public class Main {
                 }
 
                 writer.close();
-                System.out.println("Wykonywanie zakonczone, wyniki zapisano do pliku RESULTS.txt");
+                System.out.println("Wykonywanie zakonczone, wyniki zapisano do pliku TMIERRESULTS.csv");
             } catch (IOException e) {
                 //e.printStackTrace();
                 System.out.println("Nie udalo sie utworzyc pliku. Sprobuj jeszcze raz");
@@ -113,7 +113,7 @@ public class Main {
                 System.out.println("Pair: " + i + " - " + result[i]);
             }
             System.out.println("Wielkosc problemu: " + result.length + ", elapsed time: " + peopleGraph.getElapsedTime() + "(nanoseconds).");
-            peopleGraph.writePairsToFile(workingDirectory + "/PAIRS.csv");
+            //peopleGraph.writePairsToFile(workingDirectory + "/PAIRS.csv");
         }
         else{
             System.out.println("Wielkosc problemu: " + result.length + ", elapsed time: " + peopleGraph.getElapsedTime() + "(nanoseconds).");
