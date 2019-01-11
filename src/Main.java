@@ -127,7 +127,6 @@ public class Main {
             System.out.println("Problem nie moze byc rozwiazany, istnieje co najmniej jedna osoba, ktora nie moze zostac polaczona z inna.");
             return -1;
         }
-cd ../.
         peopleGraph.pairingAlgorithm();
         return peopleGraph.getElapsedTime();
     }
